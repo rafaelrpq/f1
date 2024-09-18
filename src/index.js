@@ -37,16 +37,25 @@ const OpenF1 = {
         let content_driver = document.createElement ('div');
         content_driver.classList.add('driver');
         content_driver.innerText = driver.full_name;
+        content_driver.style.backgroundImage = `linear-gradient(to right, #${driver.team_colour}, #fff)`
         
     
         let nav = document.createElement('nav');
         
         let radio = document.createElement ('a')
-        radio.innerText = 'Radio'
+        radio.innerHTML = '<i class="ph-duotone ph-headset"></i>'
+        radio.href = '#'
+        radio.title = 'Radio'
+
         let car = document.createElement ('a')
-        car.innerText = 'Car'
+        car.innerHTML = '<i class="ph-duotone ph-steering-wheel"></i>'
+        car.href = '#'
+        car.title = 'Car'
+
         let lap = document.createElement ('a')
-        lap.innerText = 'Lap'
+        lap.innerHTML = '<i class="ph-duotone ph-alarm"></i>'
+        lap.href = '#'
+        lap.title = 'Lap'
     
     
         content.appendChild(content_driver);
