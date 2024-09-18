@@ -1,2 +1,2 @@
 # FORMULA 1 - LIVE INFO
-!(preview)[./res/preview.png]
+![preview](./res/preview.png)
