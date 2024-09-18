@@ -37,13 +37,14 @@
             align-items: center;
             justify-content: center;
             height: 5rem;
+            z-index: 2;
         }
 
         aside {
             width: 34vw;
-            overflow-y: auto;
+            z-index: 2;
         }
-
+        
         main {
             background-color: green;
             width: 66vw;
@@ -57,15 +58,33 @@
             background-color: yellow;
             width: 100%;
             height: 3vh;
+            z-index: 2;
         }
-
+        
         body > div {
             height: 92vh;
             display: flex;
+            
         }
-
-        aside > p {
+        
+        aside > div.title {
+            position: sticky;
+            font-weight: bold;
+            height: 2.4rem;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        aside > div.info {
+            height: 100%;
+            overflow-y: auto;
+        }
+        aside > div.info > p {
             margin: .5rem;
+            border: .1rem solid #333;
+            border-radius: .3rem;
+            padding: .5rem;
         }
 
         div.card {
@@ -74,7 +93,7 @@
             display: flex;
             align-items: center;
             margin: 1rem;
-            position: relative;
+            
         }
         
         div.card > img {
@@ -83,11 +102,13 @@
             border-radius: 9rem;
             border: .1rem solid #333;
             background-color: #306;
-            position: relative;
+            z-index: 1;
+            
         }
         
         div.card > .card-content {
             width: -webkit-fill-available;
+            position: rela
         }
 
         div.card > .card-content .driver {
@@ -95,10 +116,23 @@
             border: .1rem solid #333;
             border-radius: 0 .8rem 6.4rem 0;
             background-color: aliceblue;
-            padding: 1rem;
-            padding-left: 1.6rem;
+            padding: .65rem;
             margin-left: -1.3rem;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
         }
+
+        div.card > .card-content .driver > span:last-child {
+            font-size: 1.6rem;
+            font-style: italic;
+            /* background-color: black;
+            background-clip: text;
+            -webkit-background-clip: text; */
+            text-shadow: .1rem .1rem 0 #000;
+            
+        }
+
 
         div.card > .card-content nav {
             border: .1rem solid #333;
@@ -110,7 +144,7 @@
             margin-left: -1.3rem;
         }
 
-        div.card > .card-content nav a{
+        div.card > .card-content nav a {
             padding: .5rem;
             text-decoration: none;
             color: #333;
@@ -127,7 +161,10 @@
         <main>
             
         </main>
-        <aside>RACE CONTROL</aside>
+        <aside>
+            <div class="title">RACE CONTROL</div>
+            <div class="info"></div>
+        </aside>
     </div>
     <footer>footer</footer>
 </body>

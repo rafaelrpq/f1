@@ -36,9 +36,14 @@ const OpenF1 = {
         
         let content_driver = document.createElement ('div');
         content_driver.classList.add('driver');
-        content_driver.innerText = driver.full_name;
         content_driver.style.backgroundImage = `linear-gradient(to right, #${driver.team_colour}, #fff)`
+
+        let name = document.createElement ('span')
+        name.innerText = driver.full_name;
         
+        let number = document.createElement ('span')
+        number.innerText = driver.driver_number;
+        number.style.color = `#${driver.team_colour}`;
     
         let nav = document.createElement('nav');
         
@@ -58,6 +63,9 @@ const OpenF1 = {
         lap.title = 'Lap'
     
     
+        content_driver.append (name)
+        content_driver.append (number)
+
         content.appendChild(content_driver);
         content.appendChild(nav);
     
@@ -74,7 +82,7 @@ const OpenF1 = {
 }
 
 const main = document.querySelector('main');
-const aside = document.querySelector('aside');
+const race_control = document.querySelector('aside div.info');
 
 
 OpenF1.load_drivers().then (()=>{
@@ -86,6 +94,8 @@ OpenF1.load_drivers().then (()=>{
 
 OpenF1.load_race_control().then (()=>{
     OpenF1.race_control.forEach(info => {
-        aside.innerHTML += `<p>${info.message}</p>`
+        race_control.innerHTML += `<p>${info.message}</p>`
     });
 });
+
+
