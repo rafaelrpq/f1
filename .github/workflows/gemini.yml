@@ -39,7 +39,7 @@ jobs:
           model: "gemini-1.5-pro-exp-0827"
           pull_request_diff: |-
             ${{ steps.get_diff.outputs.pull_request_diff }}
-          pull_request_chunk_size: "100"
+          pull_request_chunk_size: "10000000"
           extra_prompt: |-
             Code reviews need to be multifaceted, critical, thoughtful and excellent. Write review in brazilian portuguese, make a static analysis and code smells detection.
           log_level: "DEBUG"
