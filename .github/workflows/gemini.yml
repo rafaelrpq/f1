@@ -41,5 +41,5 @@ jobs:
             ${{ steps.get_diff.outputs.pull_request_diff }}
           pull_request_chunk_size: "10000000"
           extra_prompt: |-
-            Code reviews need to be multifaceted, critical, thoughtful and excellent. Write review in brazilian portuguese.
+            Code reviews need to be multifaceted, critical, thoughtful and excellent. Write review in brazilian portuguese, make a static analysis and code smells detection.
           log_level: "DEBUG"
