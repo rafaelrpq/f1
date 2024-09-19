@@ -36,10 +36,10 @@ jobs:
           github_repository: ${{ github.repository }}
           github_pull_request_number: ${{ github.event.pull_request.number }}
           git_commit_hash: ${{ github.event.pull_request.head.sha }}
-          model: "gemini-1.5-pro-exp-0827"
+          model: "gemini-1.5-pro"
           pull_request_diff: |-
             ${{ steps.get_diff.outputs.pull_request_diff }}
-          pull_request_chunk_size: "30000000"
+          pull_request_chunk_size: "90000000"
           extra_prompt: |-
             faça análises estáticas, detecção de odores de código e revisões de código. elas precisam estar em português brasileiro, serem multifacetadas, críticas, ponderadas e excelentes
           log_level: "DEBUG"
