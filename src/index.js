@@ -10,7 +10,6 @@ const OpenF1 = {
     team_radio : null,
 
     get_data : async (url) => {
-        console.log ("url ",url) 
         let response = await fetch(url);
         let data = await response.json()
         return data;
@@ -31,19 +30,20 @@ const OpenF1 = {
     },
 
     create_driver_card : function (driver) {
-        let card = document.createElement('div');
+        let card = document.createElement('card');
         card.classList.add('card');
+        card.style.borderBottom = `.5rem solid #${driver.team_colour}`;
         
-        let img = new Image();
-        img.src = driver.headshot_url ?? 'res/user.png';
-        img.style.backgroundColor = `#${driver.team_colour}`
+        let img = document.createElement('span');
+        if (driver.headshot_url !== null)
+            img.style.backgroundImage = "url("+ driver.headshot_url + ")";
+        img.classList.add('img');
         
         let content = document.createElement('div');
         content.classList.add('card-content');
         
         let content_driver = document.createElement ('div');
         content_driver.classList.add('driver');
-        content_driver.style.backgroundImage = `linear-gradient(to right, #${driver.team_colour}, #fff)`
 
         let name = document.createElement ('span')
         name.innerText = driver.full_name;
@@ -51,6 +51,7 @@ const OpenF1 = {
         let number = document.createElement ('span')
         number.innerText = driver.driver_number;
         number.style.color = `#${driver.team_colour}`;
+        number.classList.add('number');
     
         let nav = document.createElement('nav');
         
@@ -71,20 +72,19 @@ const OpenF1 = {
         lap.href = '#'
         lap.title = 'Lap'
     
-    
         content_driver.append (name)
-        content_driver.append (number)
-
+        
         content.appendChild(content_driver);
         content.appendChild(nav);
-    
+        
         nav.appendChild(radio);
         nav.appendChild(car);
         nav.appendChild(lap);
-    
-    
-        card.appendChild(img);
+        
+        
+        card.append (number)
         card.appendChild(content);
+        card.appendChild(img);
     
         return card;
     },
@@ -96,7 +96,7 @@ const OpenF1 = {
         header.innerText = 'Team Radio';
 
         let close = document.createElement ('i');
-        close.classList.add('ph-duotone','ph-x-circle');
+        close.classList.add('ph-bold','ph-x');
         close.onclick = () => {
             dialog.close();
             dialog.remove();
@@ -117,8 +117,12 @@ const OpenF1 = {
             
             OpenF1.team_radio.forEach (radio => {
                 let audio = new Audio(radio.recording_url);
+                let label = document.createElement ('label');
+                let data = new Date(radio.date);
+                label.innerText = data.toLocaleTimeString();
                 audio.controls = true;
                 dialog_main.appendChild (audio);
+                dialog_main.appendChild (label);
             })
         });
 
@@ -137,19 +141,62 @@ const OpenF1 = {
 const main = document.querySelector('main');
 const race_control = document.querySelector('aside div.info');
 
+const options = {
+    drivers : document.querySelector ('#drivers'),
+    race_control : document.querySelector ('#race_control')
+}
 
-OpenF1.load_drivers().then (()=>{
-    document.querySelector ('.loading').remove ()
-    OpenF1.drivers.forEach(driver => {
-        let card = OpenF1.create_driver_card(driver);
-        main.appendChild(card);
+const loading = document.createElement ('div');
+loading.className = 'loading';   
+
+let loop;
+
+options.drivers.addEventListener ('click', () => {
+    clear ();
+    clearInterval (loop);
+    main.append (loading);
+    menu.click()
+    options.drivers.classList.add ('active');
+    OpenF1.load_drivers().then (()=>{
+        loading.remove ()
+        OpenF1.drivers.forEach(driver => {
+            let card = OpenF1.create_driver_card(driver);
+            main.appendChild(card);
+        });
     });
-});
-
-OpenF1.load_race_control().then (()=>{
-    OpenF1.race_control.forEach(info => {
-        race_control.innerHTML += `<p>${info.message}</p>`
-    });
-});
+})
 
 
+options.race_control.addEventListener ( 'click', () => {
+    clear ();
+    clearInterval (loop);
+    main.append (loading);
+    menu.click()
+    options.race_control.classList.add ('active');
+    loop = setInterval ( () => {
+        OpenF1.load_race_control().then (()=>{
+            clear(); 
+            OpenF1.race_control.forEach(info => {
+                main.innerHTML += `<p>${info.message}</p>`
+            });
+        });
+    } , 1000)
+})
+
+const menu = document.querySelector('header i');
+const nav = document.querySelector('body nav');
+
+menu.addEventListener ('click', () => {
+    menu.classList.toggle ('ph-x')
+    menu.classList.toggle ('ph-list')
+    nav.classList.toggle ('show-nav');
+    for (let i in options) {
+        options[i].classList.remove ( 'active')
+    }
+
+})
+
+
+function clear () {
+    main.innerHTML = '';
+}

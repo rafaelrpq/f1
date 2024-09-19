@@ -7,46 +7,42 @@ body {
     overflow: hidden;
     font-size: 1.2rem;
     font-family: Formula1;
-    background-color: #666;
-
-    background-image: url("https://www.transparenttextures.com/patterns/ps-neutral.png");
-
+    background-color: #aaa;
     user-select: none;
 }
 
-body header {
+header {
     grid-area: header;
     background-color: red;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 5.6rem;
+    height: 5rem;
     z-index: 2;
     color: #fff;
-    font-size: 2.4rem;
+    font-size: 2rem;
     font-weight: bold;
 }
 
-body > nav {
-    background-color: #333;
-    color: #fff;
-    height: 3.2rem;
-    display: flex;
-    align-items: center;
-    width: 100%;
+aside {
+    width: 34vw;
+    z-index: 2;
+    border: .1rem solid #333;
 }
 
-body > main {
+main {
+    width: 66vw;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    position: relative;
     height: 100%;
     overflow-y: auto;
 }
 
-body > footer {
+footer {
     grid-area: footer;
     width: 100%;
     height: 3rem;
@@ -57,39 +53,45 @@ body > footer {
     align-items: center;
 }
 
-body > header > i {
-    position: absolute;
-    left: 1.6rem;
-    background-color: #aaa;
-    background-clip: text;
-    border: none;
-    font-size: 2.4rem;
-    display: none;
+body > div {
+    height: calc(100% - 8rem);
+    display: flex;
+    
 }
 
-body > nav a {
-    padding: .5rem;
-    text-decoration: none;
+aside > div.title {
+    position: sticky;
+    font-weight: bold;
+    height: 2.4rem;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #333;
     color: #fff;
-    font-size: 1.6rem;
 }
 
-body > nav a:hover {
-    /* color: #f00; */
-    text-decoration: underline;
+aside > div.info {
+    position: relative;
+    height: calc(100% - 2.4rem);
+    overflow-y: auto;
+}
+aside > div.info > p {
+    margin: .5rem;
+    border-radius: .3rem;
+    padding: .5rem; 
+    background-color: #ccc;
+    background-color: #fff;
+    box-shadow: .2rem .2rem .3rem #000;
+    border: .1rem solid #333;
+    /* border: .1rem solid #888;
+    color: #888; */
 }
 
-body > nav a:active {
-    text-decoration: underline;
-}
-
-
-body > main > .card {
+div.card {
     width: 28rem;
-    height: 6.9rem;
+    height: 7rem;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     margin: 1rem;
     background: repeating-linear-gradient(
         -55deg,
@@ -100,22 +102,22 @@ body > main > .card {
     );
     border-top: .5rem transparent;
     color: #fff;
+    
 }
-
-body > main > .card > .img {
+div.card > div.img {
     width: 6.4rem;
     height: 6.4rem;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-}   
+}
 
-body > main > .card > .card-content {
+div.card > .card-content {
     width: -webkit-fill-available;
     filter:drop-shadow(.3rem .3rem .5rem #000)
 }
 
-body > main > .card > .card-content .driver {
+div.card > .card-content .driver {
     font-weight: bold;
     padding: 1rem;
     display: flex;
@@ -123,7 +125,7 @@ body > main > .card > .card-content .driver {
     align-items: center;      
 }
 
-body > main > .card > .number {
+div.card > .number {
     width: 6.4rem;
     font-size: 3.2rem;
     font-style: italic;
@@ -134,14 +136,11 @@ body > main > .card > .number {
 }
 
 
-body > main > .card > .card-content nav {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: none;
+div.card > .card-content nav {
+    text-align: center;
 }
 
-body > main > .card > .card-content nav a {
+div.card > .card-content nav a {
     padding: .5rem;
     text-decoration: none;
     color: #fff;
@@ -149,12 +148,11 @@ body > main > .card > .card-content nav a {
     margin: 0 .5rem;
 }
     
-body > main > .card > .card-content nav a:hover {
+div.card > .card-content nav a:hover {
     color: #f00;
 } 
 
-
-body > dialog {
+dialog {
     margin: auto;
     width: 50rem;
     height: 50rem;
@@ -162,68 +160,60 @@ body > dialog {
     background-color: #fff;
     outline: none;
     position: absolute;
-    user-select: none;
 }
 
-body > dialog::backdrop {
+dialog::backdrop {
     backdrop-filter: blur(.2rem);
     /* background-color: rgba(0,0,0,0.5); */
 }
 
-body > dialog > header > i {
+
+dialog > header > i {
     position: absolute;
     left: 1.6rem;
+    background-color: #aaa;
+    background-clip: text;
+    border: none;
+    font-size: 2.4rem;
 }
 
-body > dialog > main {
+dialog > header > i:hover {
+    text-shadow: .1rem .1rem 0 #000;
+    cursor: pointer;
+}
+
+dialog p {
+    margin: 1rem
+}
+
+dialog > main {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     flex-wrap: nowrap;
-    height: calc(100% - 6rem);
+    height: calc(100% - 5rem);
     width: 100%;
     overflow-y: auto;
     position: relative;
 }
 
-body > dialog > main > p {
-    margin: 1rem;
-}
-
-body > dialog > main > label {
+dialog > main > label {
     font-size: 1rem;
 }
 
-.active {
-    text-decoration: underline;
+.loading {
+    width: 28.2rem;
+    height: 1.6rem;
+    border-radius: .7rem;
+    border: .2rem solid #aaa;
+    box-shadow: .3rem .3rem .3rem rgba(0,0,0,0.5);
+    background: linear-gradient(90deg ,white 50%,black 50%) 0 0%, linear-gradient(-90deg,white 50%,black 50%) 0 50%, linear-gradient(90deg ,white 50%,black 50%) 0 100%;
+    background-size: .9rem .4rem;
+    background-repeat: repeat-x;
+    animation: loop .5s infinite linear;
 }
 
-
-
-@media screen and (max-width: 500px) {
-    header > i {
-        display: block;
-    }
-
-    body > nav {
-        display: none;
-        height: fit-content;
-        position: absolute;
-        top: 5rem;
-        z-index: 9;
-    }
-
-    body > nav > i {
-        display: none;
-    }
-
-    body > nav > a {
-        padding: 1.6rem;
-    }
-
-    .show-nav {
-        display: flex;
-        flex-direction: column;
-    }
+@keyframes loop {
+    100% {background-position: -8px 0%,-8px 50%,-8px 100%}
 }
