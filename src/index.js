@@ -90,50 +90,30 @@ const OpenF1 = {
     },
 
     dialog_team_radio : function (driver) {
-        let dialog = document.createElement('dialog');
-
-        let header = document.createElement ('header');
-        header.innerText = 'Team Radio';
-
-        let close = document.createElement ('i');
-        close.classList.add('ph-bold','ph-x');
-        close.onclick = () => {
-            dialog.close();
-            dialog.remove();
-        }
-        
-        let dialog_main = document.createElement ('main');
-        
+        let radio = Dialog.create_dialog ('Team Radio');        
+        clear (radio.main)
         
         let titulo = document.createElement ('p');
-        titulo.innerText = driver.full_name;
-        
-        let loading = document.createElement ('div');
-        loading.className = 'loading';
-        dialog_main.appendChild(loading);        
-        
+        titulo.innerText = driver.full_name;    
+        radio.main.appendChild(titulo);
+               
         OpenF1.load_team_radio(driver.driver_number).then (()=>{
-            loading.remove ();
+            radio.loading.remove ();
             
-            OpenF1.team_radio.forEach (radio => {
-                let audio = new Audio(radio.recording_url);
+
+            OpenF1.team_radio.forEach (info => {
+                let audio = new Audio(info.recording_url);
                 let label = document.createElement ('label');
-                let data = new Date(radio.date);
+                let data = new Date(info.date);
                 label.innerText = data.toLocaleTimeString();
                 audio.controls = true;
-                dialog_main.appendChild (audio);
-                dialog_main.appendChild (label);
+                radio.main.appendChild (audio);
+                radio.main.appendChild (label);
             })
         });
 
-        dialog.appendChild(header);
-        header.appendChild(close);
-
-        dialog.appendChild(dialog_main);
-        dialog_main.appendChild(titulo);
-
-        document.body.appendChild(dialog);
-        dialog.showModal();
+        document.body.appendChild(radio.dialog);
+        radio.dialog.showModal();
     },
 
 }
@@ -152,7 +132,7 @@ loading.className = 'loading';
 let loop;
 
 options.drivers.addEventListener ('click', () => {
-    clear ();
+    clear (main);
     clearInterval (loop);
     main.append (loading);
     menu.click()
@@ -168,14 +148,14 @@ options.drivers.addEventListener ('click', () => {
 
 
 options.race_control.addEventListener ( 'click', () => {
-    clear ();
+    clear (main);
     clearInterval (loop);
     main.append (loading);
     menu.click()
     options.race_control.classList.add ('active');
     loop = setInterval ( () => {
         OpenF1.load_race_control().then (()=>{
-            clear(); 
+            clear(main); 
             OpenF1.race_control.forEach(info => {
                 main.innerHTML += `<p>${info.message}</p>`
             });
@@ -197,6 +177,34 @@ menu.addEventListener ('click', () => {
 })
 
 
-function clear () {
+function clear (main) {
     main.innerHTML = '';
+}
+
+
+const Dialog = {
+    dialog    : document.createElement('dialog'),
+    header    : document.createElement ('header'),
+    main      : document.createElement ('main'),
+    closeBtn  : document.createElement ('i'),
+    loading   : document.createElement ('div'); 
+
+    create_dialog : (title) => {
+        Dialog.header.innerText = title;
+        Dialog.header.appendChild(Dialog.closeBtn);
+        Dialog.dialog.appendChild(Dialog.header);
+
+        Dialog.dialog.appendChild(Dialog.main);
+
+        Dialog.loading.className = 'loading';
+        Dialog.main.appendChild(loading);
+        
+        Dialog.closeBtn.classList.add('ph-bold','ph-x');
+        Dialog.closeBtn.onclick = () => {
+            Dialog.dialog.remove();
+            Dialog.dialog.close();
+        }
+
+        return Dialog;
+    },
 }

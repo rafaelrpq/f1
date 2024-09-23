@@ -154,6 +154,11 @@ body > main > .card > .card-content nav a:hover {
 } 
 
 
+body > main > p {
+    display: block;
+    margin: 1.6rem;
+}
+
 body > dialog {
     margin: auto;
     width: 50rem;
