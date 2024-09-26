@@ -39,7 +39,7 @@ jobs:
           model: "gemini-1.5-pro"
           pull_request_diff: |-
             ${{ steps.get_diff.outputs.pull_request_diff }}
-          pull_request_chunk_size: "500000"
+          pull_request_chunk_size: "1500000"
           extra_prompt: |-
-            faça análises estáticas, detecção de odores de código e revisões de código. elas precisam estar em português brasileiro, serem multifacetadas, críticas, ponderadas e excelentes
+            Code reviews need to be multifaceted, critical, thoughtful and excellent.
           log_level: "DEBUG"

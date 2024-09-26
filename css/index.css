@@ -68,7 +68,7 @@ body > header > i {
 }
 
 body > nav a {
-    padding: .5rem;
+    padding: 0.5rem;
     text-decoration: none;
     color: #fff;
     font-size: 1.6rem;
@@ -82,7 +82,6 @@ body > nav a:hover {
 body > nav a:active {
     text-decoration: underline;
 }
-
 
 body > main > .card {
     width: 28rem;
@@ -98,7 +97,7 @@ body > main > .card {
         #333 10px,
         #333 20px
     );
-    border-top: .5rem transparent;
+    border-top: 0.5rem transparent;
     color: #fff;
 }
 
@@ -108,11 +107,11 @@ body > main > .card > .img {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-}   
+}
 
 body > main > .card > .card-content {
     width: -webkit-fill-available;
-    filter:drop-shadow(.3rem .3rem .5rem #000)
+    filter: drop-shadow(0.3rem 0.3rem 0.5rem #000);
 }
 
 body > main > .card > .card-content .driver {
@@ -120,19 +119,18 @@ body > main > .card > .card-content .driver {
     padding: 1rem;
     display: flex;
     justify-content: center;
-    align-items: center;      
+    align-items: center;
 }
 
 body > main > .card > .number {
     width: 6.4rem;
     font-size: 3.2rem;
     font-style: italic;
-    text-shadow: .1rem .1rem 0 #000;
+    text-shadow: 0.1rem 0.1rem 0 #000;
     text-align: center;
     font-weight: bold;
     margin-right: -1.6rem;
 }
-
 
 body > main > .card > .card-content nav {
     display: flex;
@@ -142,23 +140,27 @@ body > main > .card > .card-content nav {
 }
 
 body > main > .card > .card-content nav a {
-    padding: .5rem;
+    padding: 0.5rem;
     text-decoration: none;
     color: #fff;
     font-size: 1.6rem;
-    margin: 0 .5rem;
+    margin: 0 0.5rem;
 }
-    
+
 body > main > .card > .card-content nav a:hover {
     color: #f00;
-} 
+}
 
+body > main > p {
+    display: block;
+    margin: 1.6rem;
+}
 
 body > dialog {
     margin: auto;
     width: 50rem;
     height: 50rem;
-    border: .1rem solid #333;
+    border: 0.1rem solid #333;
     background-color: #fff;
     outline: none;
     position: absolute;
@@ -166,7 +168,7 @@ body > dialog {
 }
 
 body > dialog::backdrop {
-    backdrop-filter: blur(.2rem);
+    backdrop-filter: blur(0.2rem);
     /* background-color: rgba(0,0,0,0.5); */
 }
 
@@ -199,10 +201,8 @@ body > dialog > main > label {
     text-decoration: underline;
 }
 
-
-
 @media screen and (max-width: 500px) {
-    header > i {
+    body > header > i {
         display: block;
     }
 
