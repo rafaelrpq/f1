@@ -14,34 +14,7 @@ jobs:
         uses: M0ch0/gemini-code-review-action-full-context@0.1.5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          review-type: 'push'
-          review-title: 'Code Review on Push'
-          review-body: 'This is an automated code review triggered by a push to the main branch. It includes static analysis and code smell detection.'
-          review-assignees: 'your-username'
-          review-labels: 'code-review, automated'
-          review-comments: 'true'
-          review-comments-mode: 'all'
-          review-comments-context: 'full'
-          review-comments-threshold: 'minor'
-          review-comments-ignore-paths: '**/node_modules/**, **/vendor/**'
-          review-comments-ignore-files: '*.md, *.txt'
-          review-comments-ignore-lines: '^\s*//.*$'
-          review-comments-ignore-patterns: '.*ignore.*'
-          review-comments-ignore-rules: '.*ignore.*'
-          review-comments-ignore-languages: '.*ignore.*'
-          review-comments-ignore-categories: '.*ignore.*'
-          review-comments-ignore-severities: '.*ignore.*'
-          review-comments-ignore-types: '.*ignore.*'
-          review-comments-ignore-tags: '.*ignore.*'
-          review-comments-ignore-authors: '.*ignore.*'
-          review-comments-ignore-dates: '.*ignore.*'
-          review-comments-ignore-commits: '.*ignore.*'
-          review-comments-ignore-branches: '.*ignore.*'
-          review-comments-ignore-pull-requests: '.*ignore.*'
-          review-comments-ignore-issues: '.*ignore.*'
-          review-comments-ignore-repositories: '.*ignore.*'
-          review-comments-ignore-organizations: '.*ignore.*'
-
+        
           gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           github_repository: ${{ github.repository }}
@@ -51,19 +24,3 @@ jobs:
           # Extra prompt for GPT
           extra_prompt: |-
             escreva as revisões de tendo como base os princípios da engenharia de software
-          # Temperature for GPT
-          temperature: 1 # optional, default is 0.7
-          # Max tokens for GPT
-          #max_tokens: # optional, default is 256
-          # Top p for GPT
-          #top_p: # optional, default is 1
-          # Frequency penalty for GPT
-          #frequency_penalty: 0 # optional, default is 0.0
-          # Presence penalty for GPT
-          #presence_penalty: 0 # optional, default is 0.0
-          # Pull request diff
-          #pull_request_diff: 
-          # Pull request chunk size
-          #pull_request_chunk_size: # optional, default is 3500
-          # Log level
-          #log_level: # optional, default is INFO
