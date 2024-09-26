@@ -2,8 +2,7 @@ const OpenF1 = {
   source: {
     drivers: "https://api.openf1.org/v1/drivers?session_key=latest",
     race_control: "https://api.openf1.org/v1/race_control?session_key=latest",
-    team_radio:
-      "https://api.openf1.org/v1/team_radio?session_key=latest&driver_number=",
+    team_radio: "https://api.openf1.org/v1/team_radio?session_key=latest&driver_number=",
   },
 
   drivers: null,
