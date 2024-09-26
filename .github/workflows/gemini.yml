@@ -41,5 +41,5 @@ jobs:
             ${{ steps.get_diff.outputs.pull_request_diff }}
           pull_request_chunk_size: "500000"
           extra_prompt: |-
-            faça análises estáticas, detecção de "code smells" e revisões de código. elas precisam estar em português brasileiro, serem multifacetadas, críticas, ponderadas e excelentes
+            faça análises estáticas, detecção de code smells e revisões de código. elas precisam estar em português brasileiro, serem multifacetadas, críticas, ponderadas e excelentes
           log_level: "DEBUG"
