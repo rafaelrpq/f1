@@ -27,15 +27,13 @@ jobs:
             cat "diff.txt";
             echo 'EOF';
           } >> $GITHUB_OUTPUT
-      - uses: M0ch0/gemini-code-review-action-full-context@0.1.1
+      - uses: M0ch0/gemini-code-review-action-full-context@0.1.5
         name: "Code Review by Gemini AI"
         id: review
         with:
           gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           github_repository: ${{ github.repository }}
-          github_pull_request_number: ${{ github.event.pull_request.number }}
-          git_commit_hash: ${{ github.event.pull_request.head.sha }}
           model: "gemini-1.5-pro"
           pull_request_diff: |-
             ${{ steps.get_diff.outputs.pull_request_diff }}
