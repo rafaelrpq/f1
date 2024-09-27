@@ -40,5 +40,5 @@ jobs:
           pull_request_chunk_size: "3500"
           extra_prompt: |-
             sempre responda em português brasileiro
-            #Code reviews need to be multifaceted, critical, thoughtful and excellent.
           log_level: "DEBUG"
+          #Code reviews need to be multifaceted, critical, thoughtful and excellent.
