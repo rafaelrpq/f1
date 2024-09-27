@@ -13,8 +13,7 @@ jobs:
       - name: Code Review
         uses: M0ch0/gemini-code-review-action-full-context@0.1.5
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-        
+                  
           gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           github_repository: ${{ github.repository }}
