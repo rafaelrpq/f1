@@ -16,7 +16,7 @@ jobs:
                   
           gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          github_repository: ${{ github.repository }}
+          #github_repository: ${{ github.repository }}
           
           # default is text-davinci-003
           model: "gemini-1.5-pro"
