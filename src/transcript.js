@@ -41,4 +41,4 @@ async function fazerConsulta(prompt) {
 
 // Exemplo de uso
 const meuPrompt = 'Escreva um pequeno poema sobre o mar.';
-fazerConsulta(meuPrompt);
+// fazerConsulta(meuPrompt);

@@ -36,10 +36,12 @@ const OpenF1 = {
     card.classList.add("card");
     card.style.borderBottom = `.5rem solid #${driver.team_colour}`;
 
-    let img = document.createElement("span");
-    if (driver.headshot_url !== null)
-      img.style.backgroundImage = "url(" + driver.headshot_url + ")";
-    img.classList.add("img");
+    // let img = document.createElement("span");
+    // if (driver.headshot_url !== null)
+    //   img.style.backgroundImage = "url(" + driver.headshot_url + ")";
+    // img.classList.add("img");
+    let img = new Image();
+    img.src = driver.headshot_url;
 
     let content = document.createElement("div");
     content.classList.add("card-content");
@@ -48,7 +50,7 @@ const OpenF1 = {
     content_driver.classList.add("driver");
 
     let name = document.createElement("span");
-    name.innerText = driver.full_name;
+    name.innerHTML = `${driver.first_name}<br><span style="color: #${driver.team_colour}">${driver.last_name.toUpperCase()}</span>`;
 
     let number = document.createElement("span");
     number.innerText = driver.driver_number;

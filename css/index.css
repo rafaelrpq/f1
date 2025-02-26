@@ -84,8 +84,8 @@ body > nav a:active {
 }
 
 body > main > .card {
-    width: 28rem;
-    height: 6.9rem;
+    width: 25.6rem;
+    height: 7.2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -99,27 +99,27 @@ body > main > .card {
     );
     border-top: 0.5rem transparent;
     color: #fff;
+    overflow: hidden;
 }
 
-body > main > .card > .img {
-    width: 6.4rem;
-    height: 6.4rem;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+body > main > .card > img {
+    height: 100%;
+    filter: drop-shadow(0 0 0.8rem #000);
 }
 
 body > main > .card > .card-content {
-    width: -webkit-fill-available;
-    filter: drop-shadow(0.3rem 0.3rem 0.5rem #000);
+    width: 12.8rem;
+    text-shadow: 0.1rem 0.1rem 0 #000;
 }
 
 body > main > .card > .card-content .driver {
     font-weight: bold;
-    padding: 1rem;
+    padding-top: 2.3rem;
+    padding-left: 1.6rem;
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
+    width: 12.8rem;
 }
 
 body > main > .card > .number {
@@ -143,7 +143,7 @@ body > main > .card > .card-content nav a {
     padding: 0.5rem;
     text-decoration: none;
     color: #fff;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     margin: 0 0.5rem;
 }
 
