@@ -40,6 +40,7 @@ const OpenF1 = {
     // if (driver.headshot_url !== null)
     //   img.style.backgroundImage = "url(" + driver.headshot_url + ")";
     // img.classList.add("img");
+    
     let img = new Image();
     img.src = driver.headshot_url;
 
