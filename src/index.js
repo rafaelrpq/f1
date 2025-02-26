@@ -146,6 +146,7 @@ options.drivers.addEventListener("click", () => {
       let card = OpenF1.create_driver_card(driver);
       main.appendChild(card);
     });
+    OpenF1.load_race_control().abort();
   });
 });
 
