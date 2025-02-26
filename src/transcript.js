@@ -5,7 +5,7 @@ function setKey() {
     location.reload();
 }
 
-// const apiKey = localStorage.getItem('apiKey') ?? setKey();
+const apiKey = localStorage.getItem('apiKey') ?? setKey();
 async function fazerConsulta(prompt) {
     const apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent'; 
     const requestBody = {
