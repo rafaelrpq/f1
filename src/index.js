@@ -9,8 +9,8 @@ const OpenF1 = {
   race_control: null,
   team_radio: null,
 
-  get_data: async (url) => {
-    let response = await fetch(url);
+  get_data: async (url, signal = null) => {
+    let response = await fetch(url, {signal});
     let data = await response.json();
     return data;
   },
@@ -19,8 +19,8 @@ const OpenF1 = {
     OpenF1.drivers = await OpenF1.get_data(OpenF1.source.drivers);
   },
 
-  load_race_control: async () => {
-    OpenF1.race_control = await OpenF1.get_data(OpenF1.source.race_control);
+  load_race_control: async (signal = null) => {
+    OpenF1.race_control = await OpenF1.get_data(OpenF1.source.race_control, signal);
     OpenF1.race_control.reverse();
   },
 
@@ -133,6 +133,7 @@ const loading = document.createElement("div");
 loading.className = "loading";
 
 let loop;
+let abortSignal = null;
 
 options.drivers.addEventListener("click", () => {
   clear(main);
@@ -140,6 +141,12 @@ options.drivers.addEventListener("click", () => {
   main.append(loading);
   menu.click();
   options.drivers.classList.add("active");
+
+  if (abortSignal) {
+    abortSignal.abort();
+    abortSignal = null; // Limpa o controlador
+  }
+
   OpenF1.load_drivers().then(() => {
     loading.remove();
     OpenF1.drivers.forEach((driver) => {
@@ -156,8 +163,12 @@ options.race_control.addEventListener("click", () => {
   main.append(loading);
   menu.click();
   options.race_control.classList.add("active");
+
+  abortSignal = new AbortController();
+  const signal = abortSignal.signal;
+
   loop = setInterval(() => {
-    OpenF1.load_race_control().then(() => {
+    OpenF1.load_race_control(signal).then(() => {
       clear(main);
       OpenF1.race_control.forEach((info) => {
         main.innerHTML += `<p>${info.message}</p>`;
