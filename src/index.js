@@ -50,7 +50,11 @@ const OpenF1 = {
     content_driver.classList.add("driver");
 
     let name = document.createElement("span");
-    name.innerHTML = `${driver.first_name}<br><span style="color: #${driver.team_colour}">${driver.last_name.toUpperCase()}</span>`;
+    name.innerText = `${driver.first_name}`;
+
+    let last_name = document.createElement("span");
+    last_name.innerText = `${driver.last_name.toUpperCase()}`;
+    last_name.style.color = `#${driver.team_colour}`; 
 
     let number = document.createElement("span");
     number.innerText = driver.driver_number;
@@ -76,6 +80,7 @@ const OpenF1 = {
     lap.title = "Lap";
 
     content_driver.append(name);
+    name.append(last_name);
 
     content.appendChild(content_driver);
     content.appendChild(nav);
@@ -146,14 +151,13 @@ options.drivers.addEventListener("click", () => {
     abortSignal.abort();
     abortSignal = null; // Limpa o controlador
   }
-
+  
   OpenF1.load_drivers().then(() => {
     loading.remove();
     OpenF1.drivers.forEach((driver) => {
       let card = OpenF1.create_driver_card(driver);
       main.appendChild(card);
     });
-    OpenF1.load_race_control().abort();
   });
 });
 
@@ -173,6 +177,9 @@ options.race_control.addEventListener("click", () => {
       OpenF1.race_control.forEach((info) => {
         main.innerHTML += `<p>${info.message}</p>`;
       });
+    })
+    .catch((AbortError) => {
+      console.log('cancelado pelo AbortController');
     });
   }, 1000);
 });
