@@ -39,6 +39,7 @@ const OpenF1 = {
 
     OpenF1.car_data = await OpenF1.get_data(
       OpenF1.source.car_data + driver_number + date,
+      console.log (OpenF1.source.car_data + driver_number + date)
     );
     OpenF1.car_data.reverse();
   },
@@ -133,6 +134,11 @@ const OpenF1 = {
         radio.main.appendChild(audio);
         radio.main.appendChild(label);
       });
+    })
+    .catch (error => {
+      radio.main.innerHTML = error+'<p>Erro ao carregar os dados</p>';
+    }).finally(() => {
+      radio.loading.remove();
     });
 
     document.body.appendChild(radio.dialog);
@@ -151,7 +157,6 @@ const OpenF1 = {
     car.main.appendChild(titulo);
   
     OpenF1.load_car_data(driver.driver_number).then(() => {
-      car.loading.remove();
   
       OpenF1.car_data.forEach((info) => {
         let label = document.createElement("label");
@@ -162,6 +167,11 @@ const OpenF1 = {
         pre.innerText = JSON.stringify(info, null, 2);
         car.main.appendChild(pre);
       });
+    })
+    .catch (error => {
+       car.main.innerHTML = error+'<p>Erro ao carregar os dados</p>';
+    }).finally(() => {
+       car.loading.remove();
     });
   
     document.body.appendChild(car.dialog);
