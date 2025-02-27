@@ -18,6 +18,11 @@ const OpenF1 = {
     return data;
   },
 
+  get_date: function () {
+    let date = new Date().setSeconds(new Date().getSeconds() - 1);
+    return (new Date (date).toISOString().slice(0, -1));
+  },
+
   load_drivers: async () => {
     OpenF1.drivers = await OpenF1.get_data(OpenF1.source.drivers);
   },
@@ -35,12 +40,13 @@ const OpenF1 = {
   },
   
   load_car_data: async (driver_number) => {
-    let date = '&date>' + new Date().toISOString()
-
-    OpenF1.car_data = await OpenF1.get_data(
+    
+    let date = "&date>" + OpenF1.get_date();
+    console.log (date);
+    OpenF1.car_data = await OpenF1.get_data (
       OpenF1.source.car_data + driver_number + date,
-      console.log (OpenF1.source.car_data + driver_number + date)
     );
+    console.log (OpenF1.source.car_data + driver_number + date)
     OpenF1.car_data.reverse();
   },
 
@@ -125,6 +131,12 @@ const OpenF1 = {
     OpenF1.load_team_radio(driver.driver_number).then(() => {
       radio.loading.remove();
 
+
+      if (OpenF1.team_radio.length === 0) {
+        radio.main.innerText = 'Não há dados disponíveis';
+        return;
+      }
+
       OpenF1.team_radio.forEach((info) => {
         let audio = new Audio(info.recording_url);
         let label = document.createElement("label");
@@ -158,6 +170,12 @@ const OpenF1 = {
   
     OpenF1.load_car_data(driver.driver_number).then(() => {
   
+      if (OpenF1.car_data.length === 0) {
+        car.main.innerText = 'Não há dados disponíveis';
+        car.loading.remove();
+        return;
+      }
+
       OpenF1.car_data.forEach((info) => {
         let label = document.createElement("label");
         let data = new Date(info.date);
