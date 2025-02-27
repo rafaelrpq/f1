@@ -3,6 +3,9 @@ const OpenF1 = {
     drivers: "https://api.openf1.org/v1/drivers?session_key=latest",
     race_control: "https://api.openf1.org/v1/race_control?session_key=latest",
     team_radio: "https://api.openf1.org/v1/team_radio?session_key=latest&driver_number=",
+    car_data: "https://api.openf1.org/v1/car_data?session_key=latest&driver_number=",
+
+
   },
 
   drivers: null,
@@ -30,6 +33,15 @@ const OpenF1 = {
     );
     OpenF1.team_radio.reverse();
   },
+  
+  load_car_data: async (driver_number) => {
+    let date = '&date>' + new Date().toISOString()
+
+    OpenF1.car_data = await OpenF1.get_data(
+      OpenF1.source.car_data + driver_number + date,
+    );
+    OpenF1.car_data.reverse();
+  },
 
   create_driver_card: function (driver) {
     let card = document.createElement("card");
@@ -40,7 +52,7 @@ const OpenF1 = {
     // if (driver.headshot_url !== null)
     //   img.style.backgroundImage = "url(" + driver.headshot_url + ")";
     // img.classList.add("img");
-    
+
     let img = new Image();
     img.src = driver.headshot_url;
 
@@ -72,8 +84,9 @@ const OpenF1 = {
 
     let car = document.createElement("a");
     car.innerHTML = '<i class="ph-duotone ph-steering-wheel"></i>';
-    car.href = "#";
+    car.href = "javascript:void(0);";
     car.title = "Car";
+    car.onclick = () => OpenF1.dialog_car_data(driver);
 
     let lap = document.createElement("a");
     lap.innerHTML = '<i class="ph-duotone ph-alarm"></i>';
@@ -125,7 +138,37 @@ const OpenF1 = {
     document.body.appendChild(radio.dialog);
     radio.dialog.showModal();
   },
+  
+  dialog_car_data: function (driver) {
+    let car = Dialog.create_dialog("Car Data");
+  
+    car.dialog.onclose = () => {
+      //car.dialog.remove();
+    };
+  
+    let titulo = document.createElement("p");
+    titulo.innerText = driver.full_name;
+    car.main.appendChild(titulo);
+  
+    OpenF1.load_car_data(driver.driver_number).then(() => {
+      car.loading.remove();
+  
+      OpenF1.car_data.forEach((info) => {
+        let label = document.createElement("label");
+        let data = new Date(info.date);
+        label.innerText = data.toLocaleTimeString();
+        car.main.appendChild(label);
+        let pre = document.createElement("pre");
+        pre.innerText = JSON.stringify(info, null, 2);
+        car.main.appendChild(pre);
+      });
+    });
+  
+    document.body.appendChild(car.dialog);
+    car.dialog.showModal();
+  }
 };
+
 
 const main = document.querySelector("main");
 const race_control = document.querySelector("aside div.info");
