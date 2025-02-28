@@ -233,3 +233,39 @@ body > dialog > main > label {
         flex-direction: column;
     }
 }
+
+table {
+    border-collapse: collapse;
+
+
+}
+
+th {
+    width: 15rem;
+    text-align: left !important;
+
+    height: 2rem;
+}
+
+td {
+    text-align: right !important;
+    width: 50%;
+
+}
+
+td > div {
+    height: 1.6rem;
+    width: 1.6rem;
+}
+
+.drs_off {
+    color: #333;
+}
+
+.drs_avail {
+    color: #060;
+}
+
+.drs_on {
+    color: #0f0;
+}

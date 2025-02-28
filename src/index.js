@@ -19,7 +19,7 @@ const OpenF1 = {
   },
 
   get_date: function () {
-    let date = new Date().setSeconds(new Date().getSeconds() - 1);
+    let date = new Date().setSeconds(new Date().getSeconds() - 3);
     return (new Date (date).toISOString().slice(0, -1));
   },
 
@@ -39,14 +39,14 @@ const OpenF1 = {
     OpenF1.team_radio.reverse();
   },
   
-  load_car_data: async (driver_number) => {
+  load_car_data: async (driver_number, signal = null) => {
     
     let date = "&date>" + OpenF1.get_date();
-    console.log (date);
+    //console.log (date);
     OpenF1.car_data = await OpenF1.get_data (
-      OpenF1.source.car_data + driver_number + date,
+      OpenF1.source.car_data + driver_number + date, signal
     );
-    console.log (OpenF1.source.car_data + driver_number + date)
+    //console.log (OpenF1.source.car_data + driver_number + date)
     OpenF1.car_data.reverse();
   },
 
@@ -129,8 +129,6 @@ const OpenF1 = {
     radio.main.appendChild(titulo);
 
     OpenF1.load_team_radio(driver.driver_number).then(() => {
-      radio.loading.remove();
-
 
       if (OpenF1.team_radio.length === 0) {
         radio.main.innerText = 'Não há dados disponíveis';
@@ -168,29 +166,57 @@ const OpenF1 = {
     titulo.innerText = driver.full_name;
     car.main.appendChild(titulo);
   
-    OpenF1.load_car_data(driver.driver_number).then(() => {
-  
-      if (OpenF1.car_data.length === 0) {
-        car.main.innerText = 'Não há dados disponíveis';
-        car.loading.remove();
-        return;
-      }
+    let pre = document.createElement("pre");
+    car.main.append(pre);
+    
+    
+    let tbl = document.createElement("table");
+    
+    let features = ["Speed", "Throttle", "Brake", "Gear", "RPM", "DRS"];
 
-      OpenF1.car_data.forEach((info) => {
-        let label = document.createElement("label");
-        let data = new Date(info.date);
-        label.innerText = data.toLocaleTimeString();
-        car.main.appendChild(label);
-        let pre = document.createElement("pre");
-        pre.innerText = JSON.stringify(info, null, 2);
-        car.main.appendChild(pre);
+    for (let i=0; i<6; i++) {
+      let tr = document.createElement("tr");
+      let th = document.createElement("th");
+      th.innerText = features[i];
+      let td = document.createElement("td");
+      tr.appendChild(th);
+      tr.appendChild(td);
+      tbl.appendChild(tr)
+    }
+    
+    let td = tbl.querySelectorAll("td");
+
+    abortSignal = new AbortController();
+    const signal = abortSignal.signal;
+
+    car.main.appendChild(tbl);
+    tbl.style.display = "none";
+    
+    td[5].innerHTML = '<i class="ph-duotone ph-circle"></i>'
+
+    loop = setInterval(() => {
+      OpenF1.load_car_data(driver.driver_number, signal).then(() => {
+
+        if (OpenF1.car_data.length === 0) {
+          // car.main.innerText = 'Não há dados disponíveis';
+         // return;
+        }  
+          let info = OpenF1.car_data[0]
+          tbl.style.display = "block";
+
+          td[0].innerText = info.speed;
+          td[1].innerText = info.throttle;
+          td[2].innerText = info.brake;
+          td[3].innerText = info.n_gear;
+          td[4].innerText = info.rpm;
+          td[5].className = (info.drs <= 1) ? 'drs_off' : (info.drs === 8) ? 'drs_avail' : (info.drs >= 10) ? 'drs_on' : 'drs_off';
+      })
+      .catch (error => {
+         console.error (error,'Erro ao carregar os dados');
+      }).finally(() => {
+         car.loading.remove();
       });
-    })
-    .catch (error => {
-       car.main.innerHTML = error+'<p>Erro ao carregar os dados</p>';
-    }).finally(() => {
-       car.loading.remove();
-    });
+    },857)
   
     document.body.appendChild(car.dialog);
     car.dialog.showModal();
@@ -293,6 +319,11 @@ const Dialog = {
     Dialog.closeBtn.onclick = () => {
       clear(Dialog.main);
       Dialog.dialog.close();
+      if (abortSignal) {
+        abortSignal.abort();
+        abortSignal = null; // Limpa o controlador
+        clearInterval(loop);
+      }
     };
 
     return Dialog;
