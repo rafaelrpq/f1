@@ -191,6 +191,26 @@ const OpenF1 = {
 
     car.main.appendChild(tbl);
     tbl.style.display = "none";
+
+
+    let throttle = document.createElement("meter");
+    throttle.min = 0;
+    throttle.max = 100;
+
+    let brake = document.createElement("meter");
+    brake.min = 0;
+    brake.max = 100;
+  
+    let rpm = document.createElement("meter");
+    rpm.min = 0;
+    rpm.max = 15000;
+    // rpm.low = 2500
+    // rpm.high = 13000  
+    // rpm.optimum = 10000
+
+    td[1].append (throttle);
+    td[2].append (brake);
+    td[4].append (rpm);
     
     td[5].innerHTML = '<i class="ph-duotone ph-circle"></i>'
 
@@ -205,10 +225,10 @@ const OpenF1 = {
           tbl.style.display = "block";
 
           td[0].innerText = info.speed;
-          td[1].innerText = info.throttle;
-          td[2].innerText = info.brake;
+          throttle.value = info.throttle;
+          brake.value = info.brake;
           td[3].innerText = info.n_gear;
-          td[4].innerText = info.rpm;
+          rpm.value = info.rpm;
           td[5].className = (info.drs <= 1) ? 'drs_off' : (info.drs === 8) ? 'drs_avail' : (info.drs >= 10) ? 'drs_on' : 'drs_off';
       })
       .catch (error => {
