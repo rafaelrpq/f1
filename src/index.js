@@ -19,7 +19,7 @@ const OpenF1 = {
   },
 
   get_date: function () {
-    let date = new Date().setSeconds(new Date().getSeconds() - 3);
+    let date = new Date().setSeconds(new Date().getSeconds() - 4);
     return (new Date (date).toISOString().slice(0, -1));
   },
 
