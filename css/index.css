@@ -3,7 +3,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     overflow: hidden;
     font-size: 1.2rem;
     font-family: Formula1;
@@ -12,261 +12,82 @@ body {
     background-image: url("https://www.transparenttextures.com/patterns/ps-neutral.png");
 
     user-select: none;
+
+    header  {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 1rem;
+        background-color: #333;
+        color: #fff;
+        font-size: 1.6rem;
+    }
+    
+    main {
+        width: 100%;
+        height: calc(100% - 8rem);    
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+
+        .driver {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 32rem;
+            height: 6.4rem;
+            padding: 1rem;
+            background-color: #333;
+            color: #fff;
+            font-size: 1.6rem;
+            margin: 1.6rem;
+            text-align: center;
+            cursor: pointer;
+            
+            .number {
+                font-size: 2.4rem;
+            }
+            
+            img {
+                width: 6.4rem;
+                height: 6.4rem;
+                /* border-radius: 50%; */
+            }
+        }
+        
+        .driver:hover {
+            background-color: #444;
+            overflow: hidden;
+            text-shadow: .3rem .3rem .5rem #000;
+           
+            img {
+                filter: drop-shadow(.3rem .3rem .5rem #000);
+            }
+        }
+    }
+    
+    footer {
+        height: 4rem;
+        width: 100%;
+        display: flex;
+        color: #fff;
+        background-color: #333;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 1rem; 
+    }
 }
 
-body header {
-    grid-area: header;
-    background-color: red;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 5.6rem;
-    z-index: 2;
-    color: #fff;
-    font-size: 2.4rem;
-    font-weight: bold;
-}
-
-body > nav {
-    background-color: #333;
-    color: #fff;
-    height: 3.2rem;
-    display: flex;
-    align-items: center;
-    width: 100%;
-}
-
-body > main {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    overflow-y: auto;
-}
-
-body > footer {
-    grid-area: footer;
-    width: 100%;
-    height: 3rem;
-    z-index: 2;
-    background-color: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-body > header > i {
-    position: absolute;
-    left: 1.6rem;
-    background-color: #aaa;
-    background-clip: text;
-    border: none;
-    font-size: 2.4rem;
-    display: none;
-}
-
-body > nav a {
-    padding: 0.5rem;
-    text-decoration: none;
-    color: #fff;
-    font-size: 1.6rem;
-}
-
-body > nav a:hover {
-    /* color: #f00; */
-    text-decoration: underline;
-}
-
-body > nav a:active {
-    text-decoration: underline;
-}
-
-body > main > .card {
-    width: 25.6rem;
-    height: 7.2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 1rem;
-    background: repeating-linear-gradient(
-        -55deg,
-        #2d2d2d,
-        #2d2d2d 10px,
-        #333 10px,
-        #333 20px
-    );
-    border-top: 0.5rem transparent;
-    color: #fff;
-    overflow: hidden;
-}
-
-body > main > .card > img {
-
-    height: 100%;
-    filter: drop-shadow(0 0 0.8rem #000);
-}
-
-body > main > .card > .card-content {
-    width: 12.8rem;
-    text-shadow: 0.1rem 0.1rem 0 #000;
-}
-
-body > main > .card > .card-content .driver {
-    font-weight: bold;
-    padding-top: 2.3rem;
-    padding-left: 1.6rem;
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    width: 12.8rem;
-}
-
-body > main > .card > .card-content .driver span {
-    display: block;
-    clear: both;
-}
-
-body > main > .card > .number {
-    width: 6.4rem;
-    font-size: 3.2rem;
-    font-style: italic;
-    text-shadow: 0.1rem 0.1rem 0 #000;
-    text-align: center;
-    font-weight: bold;
-    margin-right: -1.6rem;
-}
-
-body > main > .card > .card-content nav {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: none;
-}
-
-body > main > .card > .card-content nav a {
-    padding: 0.5rem;
-    text-decoration: none;
-    color: #fff;
-    font-size: 1.4rem;
-    margin: 0 0.5rem;
-}
-
-body > main > .card > .card-content nav a:hover {
-    color: #f00;
-}
-
-body > main > p {
-    display: block;
-    margin: 1.6rem;
-}
-
-body > dialog {
-    margin: auto;
+dialog  {
     width: 50rem;
     height: 50rem;
-    border: 0.1rem solid #333;
-    background-color: #fff;
-    outline: none;
-    position: absolute;
-    user-select: none;
+    border: .1rem solid;
+    margin: auto
 }
 
-body > dialog::backdrop {
-    backdrop-filter: blur(0.2rem);
-    /* background-color: rgba(0,0,0,0.5); */
+.ph-x {
+    cursor: pointer;
 }
-
-body > dialog > header > i {
-    position: absolute;
-    left: 1.6rem;
-}
-
-body > dialog > main {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    height: calc(100% - 6rem);
-    width: 100%;
-    overflow-y: auto;
-    position: relative;
-}
-
-body > dialog > main > p {
-    margin: 1rem;
-}
-
-body > dialog > main > label {
-    font-size: 1rem;
-}
-
-.active {
-    text-decoration: underline;
-}
-
-@media screen and (max-width: 500px) {
-    body > header > i {
-        display: block;
-    }
-
-    body > nav {
-        display: none;
-        height: fit-content;
-        position: absolute;
-        top: 5rem;
-        z-index: 9;
-    }
-
-    body > nav > i {
-        display: none;
-    }
-
-    body > nav > a {
-        padding: 1.6rem;
-    }
-
-    .show-nav {
-        display: flex;
-        flex-direction: column;
-    }
-}
-
-table {
-    border-collapse: collapse;
-
-
-}
-
-th {
-    width: 15rem;
-    text-align: left !important;
-
-    height: 2rem;
-}
-
-td {
-    text-align: right !important;
-    width: 50%;
-
-}
-
-td > div {
-    height: 1.6rem;
-    width: 1.6rem;
-}
-
-.drs_off {
-    color: #333;
-}
-
-.drs_avail {
-    color: #060;
-}
-
-.drs_on {
-    color: #0f0;
-}
-
