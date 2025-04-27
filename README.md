@@ -12,7 +12,7 @@
 ```
 
 ```mermaid
-    graph LR
+    graph TD
     doc[document] --> head(head)
     doc --> body(body)
     head --> title(title)
