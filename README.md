@@ -13,6 +13,6 @@
 
 ```mermaid
     graph TD
-    doc[document] --> head(head)
-    doc --> body(body}
+    doc[document] --> head((head))
+    doc --> body((body))
 ```
