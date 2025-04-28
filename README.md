@@ -16,6 +16,6 @@
     doc[document] --> head((head))
     doc --> body((body))
     body --> h1(h1)
+    body --> p(p)
     body --> div(div)
-    body --> div2(div2)
 ```
