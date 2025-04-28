@@ -17,5 +17,5 @@
     doc --> body((body))
     body --> h1(h1)
     body --> div(div)
-    body --> div(div2)
+    body --> div2(div2)
 ```
