@@ -15,4 +15,6 @@
     graph TD
     doc[document] --> head((head))
     doc --> body((body))
+    body --> (n1)
+    body --> (n2)
 ```
