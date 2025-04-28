@@ -13,8 +13,9 @@
 
 ```mermaid
     graph TD
-    doc[document] --> head(head)
-    doc --> body(body)
+    doc[document] --> html(html)
+    html --> head
+    html --> body(body)
     head --> title(title)
     body --> h1(h1)
     body --> p(p)
